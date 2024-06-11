@@ -39,36 +39,41 @@
                     <img src="img/cancha1.jpeg" alt="Cancha 1">
                     <h3>Cancha de Padel N°1</h3>
                     <p>Cancha de césped sintético.</p>
+                    <a href="canchas.php">Ver Horarios</a>
                     
                 </div>
                 <div class="grid-item">
                     <img src="img/cancha2.jpg" alt="Cancha 2">
                     <h3>Cancha de Padel N°2</h3>
                     <p>Cancha de césped sintético.</p>
-                    
+                    <a href="canchas.php">Ver Horarios</a>
                 </div>
                 <div class="grid-item">
                     <img src="img/cancha3.jpg" alt="Cancha 3">
                     <h3>Cancha de Padel N°3</h3>
                     <p>Description of second product</p>
+                    <a href="canchas.php">Ver Horarios</a>
                     
                 </div>
                 <div class="grid-item">
                     <img src="img/cancha4.jpeg" alt="Cancha 1 Futbol">
                     <h3>Cancha de Futbol N°1</h3>
                     <p>Description of third product</p>
+                    <a href="canchas.php">Ver Horarios</a>
                     
                 </div>
                 <div class="grid-item">
                     <img src="img/cancha5.jpg" alt="Cancha 2 Futbol">
                     <h3>Cancha de Futbol N°2</h3>
                     <p>Description of fourth product</p>
+                    <a href="canchas.php">Ver Horarios</a>
                     
                 </div>
                 <div class="grid-item">
                     <img src="img/cancha6.jpg" alt="Cancha 3 Futbol">
                     <h3>Cancha de Futbol N°3</h3>
                     <p>Description of fifth product</p>
+                    <a href="canchas.php">Ver Horarios</a>
                 
                 </div>
             </div>
