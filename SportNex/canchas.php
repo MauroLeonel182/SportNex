@@ -5,31 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SportNex</title>
     <!-- Estilos -->
-    <link rel="icon" href="img/logo.png" type="logo/png">
+    <link rel="icon" href="public/img/logo.png" type="logo/png">
     
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/canchas.css">
+    <link rel="stylesheet" href="public/css/styles.css">
+    <link rel="stylesheet" href="public/css/canchas.css">
 
     <script src="https://kit.fontawesome.com/ed3188a352.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <img src="img/logo.png" alt="logo">
-                <h1>SportNex</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Horarios</a></li>
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Register</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
+    <?php require  'vista/layouts/header.php'; ?>
+    
     <main>
         <section class="horarios">
             <h2>Horarios</h2>
@@ -44,14 +29,12 @@
                             </form>
                         </td>
                     </tr>
-                    <?php include 'obtener-horarios.php'; ?>
+                    <?php require "controlador/obtener_horarios.php"; ?>
                 </table>
             </div>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2024 SportNex. Todos los derechos reservados.</p>
-    </footer>
+    <?php require'vista/layouts/footer.php'; ?>
 </body>
 </html>
 

@@ -1,0 +1,41 @@
+main {
+    margin-top: 100px; /* Asegura que el contenido principal comience debajo del encabezado */
+    padding: 20px;
+}
+
+.horarios-container {
+    margin-top: 50px; /* Asegura espacio desde el encabezado */
+}
+
+.horarios-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+
+.horarios-table th, .horarios-table td {
+    border: 1px solid #000;
+    padding: 10px;
+    text-align: center;
+    background-color: #fff;
+    color: #000; /* Color de texto por defecto */
+}
+
+.horarios-table th {
+    background-color: #000;
+    color: #fff;
+}
+
+.horarios-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.horarios-table tr:hover {
+    background-color: #f00; /* Cambio de color de fondo */
+    color: #fff; /* Cambio de color de texto */
+}
+
+.miniatura {
+    width: 50px;
+    height: auto;
+}
