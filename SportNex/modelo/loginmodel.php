@@ -1,27 +1,36 @@
 <?php
-require_once "conexion.php"; // Asegúrate de incluir el archivo de conexión
+session_start();
 
-class Login{
-    private $_db;
+include 'conexion.php';
 
-    public function __construct(){
-        $this->_db = new Conexion();
+$email = $_POST['email'];
+$password = $_POST['contrasena'];
+$password = hash('sha512', $password);
+
+$validar_login = mysqli_query($conexion, "SELECT * FROM usuario WHERE email='$email' AND contrasena='$password'");
+
+if (mysqli_num_rows($validar_login) > 0) {
+    $row = mysqli_fetch_assoc($validar_login);
+    $_SESSION['usuario'] = $email;
+    $_SESSION['rol'] = $row['rol']; // Guardar el tipo de usuario en la sesión
+
+    if ($row['rol'] == 'administrador') {
+        header("Location: ../vista\admin\layuot\main.php");
+    } elseif ($row['rol'] == 'cliente') {
+        header("Location: ../vista/layouts/home.php");
+    } else {
+        // Redirigir a una página por defecto si el rol no es reconocido
+        header("Location: ../vista/layout/home.php");
     }
-
-    public function login($email, $contraseña){
-        $this->_db->conectar();
-        $consulta = $this->_db->conexion->prepare("SELECT * FROM usuario WHERE email=:email AND contraseña=:contrasena");
-        $consulta->bindParam(':email', $email);
-        $consulta->bindParam(':contrasena', $contraseña);
-        $consulta->execute();
-        $this->_db->desconectar();
-
-        // Comprobamos si hay algún resultado
-        if($consulta->fetch(PDO::FETCH_OBJ)){
-            return true;
-        } else {
-            return false;
-        }
-    }
+    exit;
+} else {
+    echo '
+    <script>
+        alert("Usuario inexistente, favor verificar sus datos correctamente");
+        window.location = "../login.php";
+    </script>
+    ';
+    exit;
 }
 ?>
+

@@ -1,4 +1,4 @@
-<?php require "vista\layouts\header.php";?>
+<?php include "vista\layouts\header.php";?>
 <?php
         session_start();
 
@@ -6,6 +6,7 @@
             header("location: index.php");
         }
 
+?>
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,9 +19,7 @@
                 <link rel="stylesheet" href="public/css/estilos.css">
         </head>
  <body>
-    
     <main>
-
       <div class="contendor__todo">
           <div class= "caja__trasera">
                   <div class="caja__trasera-login">
@@ -39,7 +38,7 @@
            <div class="contenedor__login-register">
 
               <!--Login-->
-              <form action="controlador/LoginController.php" method="POST" class="formulario__login">
+              <form action="modelo/loginmodel.php" method="POST" class="formulario__login">
                     <h2>Iniciar Sesion</h2>
                     <input type="text" placeholder="Email" name="email">
                     <input type="password" placeholder="Password" name="contrasena">
@@ -47,14 +46,19 @@
                </form>
 
                <!--Registro-->
-               <form action="php/registro_usuario_be.php" method="POST" class="formulario__register">
-                    <h2>Registrarme</h2>
-                    <input type="text" placeholder="Nombre Completo" name="nombre_completo">
-                    <input type="text" placeholder="Email" name="email">
-                    <input type="text" placeholder="Usuario" name="usuario">
-                    <input type="password" placeholder="Password" name="password">
-                    <button>Registrarme</button>
-                </form>
+              <form action="modelo/registro_usuario.php" method="POST" class="formulario__register">
+                <h2>Registrarme</h2>
+                <input type="text" placeholder="Nombre" name="nombre" required>
+                <input type="text" placeholder="Apellido" name="apellido" required>
+                <input type="email" placeholder="Email" name="email" required>
+                <input type="text" placeholder="DNI" name="dni" maxlength="8" required>
+                <input type="text" placeholder="Teléfono" name="telefono">
+                <input type="text" placeholder="Nombre de usuario" name="nombre_usuario" required>
+                <input type="password" placeholder="Contraseña" name="contrasena" required>
+                <input type="text" name="rol" value="cliente" style="display: none;"> <!-- Campo oculto -->
+                <button>Registrarme</button>
+              </form>
+
            </div>
        </div>  
    </main>

@@ -1,8 +1,9 @@
 <footer>
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/styles.css">
 <body>
     <div class="container">
                 <div class="logo">
-                    <img src="img/logo2.png" alt="logo/png">
+                    <img src="public/img/logo2.png" alt="logo/png">
                     <h1>SportNex</h1>
                 </div>
                 <div class="footer-links">

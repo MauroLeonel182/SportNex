@@ -21,8 +21,9 @@
                 <ul>
                     <li><a href="index.php">Home</a></li>
                     <li><a href="canchas.php">Horarios</a></li>
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href="#">Register</a></li>
+                    <li><a href="login.php" id="nav-iniciar-sesion">Iniciar Sesion</a></li>
+                    <li><a href="#" id="nav-registrarse">Registrarme</a></li>
+                    <a href="modelo/cerrar_sesion.php">LogOut</a>
                 </ul>
             </nav>
         </div>
