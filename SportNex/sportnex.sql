@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2024 a las 00:19:50
+-- Tiempo de generación: 27-06-2024 a las 16:31:02
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -65,6 +65,14 @@ CREATE TABLE `persona` (
   `telefono` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `persona`
+--
+
+INSERT INTO `persona` (`persona_id`, `nombre`, `apellido`, `email`, `dni`, `telefono`) VALUES
+(1, 'Mauro', 'Erlan', 'MauroErlan@gmail.com', '41500523', '3644546588'),
+(2, 'Lucas', 'Peñalver', 'lucaszx2102@gmail.com', '45333207', '3644359482');
+
 -- --------------------------------------------------------
 
 --
@@ -103,9 +111,17 @@ CREATE TABLE `usuario` (
   `email` varchar(100) DEFAULT NULL,
   `nombre_usuario` varchar(50) DEFAULT NULL,
   `contrasena` varchar(255) DEFAULT NULL,
-  `tipo_usuario` varchar(255) DEFAULT NULL,
-  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp()
+  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
+  `rol` enum('cliente','administrador') NOT NULL DEFAULT 'cliente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`usuario_id`, `email`, `nombre_usuario`, `contrasena`, `fecha_registro`, `rol`) VALUES
+(1, 'MauroErlan@gmail.com', 'MErlan', '75d449a00a78342d1c6a1a31be1a1d27e7ae7b7e364dad8080ffcbf46e5ed8b4683f50bf811aed5ef6e4db8622b54f053e30923899b4a898ec0e9acd5bc1f7ad', '2024-06-25 14:46:01', 'administrador'),
+(2, 'lucaszx2102@gmail.com', 'Lucasivanp', '75d449a00a78342d1c6a1a31be1a1d27e7ae7b7e364dad8080ffcbf46e5ed8b4683f50bf811aed5ef6e4db8622b54f053e30923899b4a898ec0e9acd5bc1f7ad', '2024-06-27 04:24:47', 'administrador');
 
 --
 -- Índices para tablas volcadas
@@ -175,7 +191,7 @@ ALTER TABLE `pagos`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `persona_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `persona_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `reservas`
@@ -193,7 +209,7 @@ ALTER TABLE `tipo_deporte`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
