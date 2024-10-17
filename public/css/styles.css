@@ -1,0 +1,263 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    padding: 5px 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+header .contenido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    width: 50px;
+}
+
+header .logo h1 {
+    margin-left: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    background-color: #000;
+    text-decoration: none;
+    color: #fff;
+}
+
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.menu-toggle i {
+    font-size: 24px;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    header .contenido {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    /* Ocultar el menú de navegación por defecto */
+    header nav ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: column;
+        background-color: white;
+        width: 80%;
+        padding: 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+
+    /* Mostrar el menú al hacer clic */
+    header nav ul.active {
+        display: flex;
+    }
+
+    /* Alinear el texto del menú en el centro */
+    header nav ul li {
+        width: 100%;
+        margin: 0;
+    }
+
+    header nav ul li a {
+        padding: 16px;
+        text-align: center;
+        display: block;
+        font-size: 18px;
+        color: #000;
+        border-bottom: 1px solid #f5f5f5;
+    }
+
+    /* Mostrar el botón hamburguesa */
+    .menu-toggle {
+        display: block;
+    }
+}
+
+
+
+/* Sección de INSTALACIONES */
+.instalaciones {
+    padding: 40px 20px;
+    background-color: #fff;
+    margin-top: 20px;
+}
+
+.instalaciones h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    gap: 20px;
+    padding: 0 40px;
+}
+
+.grid-item {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grid-item img {
+    width: 400px;
+    height: 240px; /* Fijamos una altura para todas las imágenes */
+    object-fit: cover; /* Ajustamos la imagen para que cubra el contenedor */
+    border-radius: 10px 10px 0 0;
+}
+
+.grid-item h3 {
+    margin: 15px 0 10px 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.grid-item p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.grid-item .price {
+    font-weight: bold;
+    color: #000;
+}
+
+.grid-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+footer {
+    background-color: #000000;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column; /* Cambiar a columna para pantallas pequeñas */
+    align-items: center; /* Centrar los elementos */
+}
+
+footer .footer-links {
+    display: flex;
+    flex-wrap: wrap; /* Permitir que las columnas se ajusten */
+    justify-content: center; /* Centrar los enlaces */
+}
+
+footer .footer-column {
+    margin: 10px; /* Agregar margen entre columnas */
+}
+
+footer .footer-column h3 {
+    margin-top: 0;
+}
+
+footer .footer-column ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer .footer-column ul li {
+    margin-bottom: 10px;
+}
+
+footer .footer-column ul li a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+footer .social-media a {
+    color: #fff;
+    margin: 0 10px; /* Espaciado entre iconos de redes sociales */
+}
+
+footer .logo img {
+    width: 80px;
+}
+
+footer .logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Espacio adicional en pantallas pequeñas */
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    footer .container {
+        flex-direction: column; /* Cambiar a columna */
+    }
+    
+    footer .footer-links {
+        flex-direction: column; /* Apilar enlaces verticalmente */
+        align-items: center; /* Centrar enlaces */
+    }
+
+    footer .footer-column {
+        margin: 0; /* Eliminar margen entre columnas */
+        text-align: center; /* Centrar texto en columnas */
+    }
+
+    footer .logo {
+        margin-bottom: 10px; /* Espacio adicional */
+    }
+}
