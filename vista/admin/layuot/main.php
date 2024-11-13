@@ -1,4 +1,17 @@
-<?php require "vista/admin/menu.php"?>
+<?php
+require "vista/admin/menu.php";
+require_once 'modelo/reporte.php';
+
+$reporte = new Reporte();
+
+// Obtener los datos dinámicos
+$ganancias = $reporte->obtenerGananciasTotales();
+$usuariosRegistrados = $reporte->obtenerUsuariosRegistrados();
+$horasAlquiladas = $reporte->obtenerHorasAlquiladas();
+$clientesFrecuentes = $reporte->obtenerClientesFrecuentes();
+$horasPorDia = $reporte->obtenerHorasPorDia(); // Obtener horas por día para el gráfico de barras
+$gananciasPorDia = $reporte->obtenerGananciasPorDia();
+?>
 
 <style>
 body {
@@ -72,7 +85,7 @@ body {
     margin-bottom: 5px;
 }
 
-.stat-box span {
+.stat-box p {
     color: #28a745;
 }
 
@@ -80,6 +93,7 @@ body {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    
 }
 
 .chart-box {
@@ -105,6 +119,7 @@ body {
     width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
+    
 }
 
 .container-xl {
@@ -122,7 +137,7 @@ body {
         <!-- Mensaje de bienvenida -->
         <div class="welcome-message">
             <?php 
-                   if (isset($_SESSION['rol']) && isset($_SESSION['usuario'])) {
+                if (isset($_SESSION['rol']) && isset($_SESSION['usuario'])) {
                     $rol = htmlspecialchars($_SESSION['rol']);
                     $usuario = htmlspecialchars($_SESSION['usuario']);
                     echo "Bienvenido, " . $usuario . "! Tu rol es " . $rol . ".";
@@ -132,57 +147,68 @@ body {
             ?>
         </div>
 
+        <!-- Sección de estadísticas -->
         <div class="stats">
             <div class="stat-box">
                 <h3>Ganancias</h3>
-                <p>$45,678.90</p>
-                <span>+20% mes a mes</span>
+                <p>$<?php echo number_format($ganancias, 2); ?></p>
+
             </div>
             <div class="stat-box">
                 <h3>Usuarios Registrados</h3>
-                <p>2,405</p>
-                <span>+33% mes a mes</span>
+                <p><?php echo $usuariosRegistrados; ?></p>
+
             </div>
             <div class="stat-box">
                 <h3>Alquiler de Horas</h3>
-                <p>10,353</p>
-                <span>-8% mes a mes</span>
+                <p><?php echo $horasAlquiladas; ?></p>
+
             </div>
         </div>
+
+        <!-- Sección de gráficos y clientes frecuentes -->
         <div class="charts">
             <div class="chart-box">
-                <h3>Título</h3>
+                <h3>Ganancias</h3>
                 <canvas id="lineChart"></canvas>
             </div>
             <div class="chart-box">
                 <h3>Clientes Frecuentes</h3>
                 <ul>
-                    <li>Helena - email@figmasfakedomain.net</li>
-                    <li>Oscar - email@figmasfakedomain.net</li>
-                    <li>Daniel - email@figmasfakedomain.net</li>
-                    <li>Daniel Jay Park - email@figmasfakedomain.net</li>
-                    <li>Mark Rojas - email@figmasfakedomain.net</li>
+                    <?php foreach ($clientesFrecuentes as $cliente): ?>
+                    <li><?php echo htmlspecialchars($cliente['nombre_usuario']) . " - " . htmlspecialchars($cliente['email']); ?>
+                    </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>
+
+        <!-- Gráfico de barras de horas más alquiladas -->
         <div class="bar-chart-box">
             <h3>Horas más Alquiladas</h3>
             <canvas id="barChart"></canvas>
         </div>
     </div>
 
+    <!-- Script de gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
     const lineCtx = document.getElementById('lineChart').getContext('2d');
     const barCtx = document.getElementById('barChart').getContext('2d');
 
+    // Pasar datos de PHP a JavaScript
+    const fechasGanancias = <?php echo json_encode($gananciasPorDia['fechas']); ?>;
+    const datosGanancias = <?php echo json_encode($gananciasPorDia['ganancias']); ?>;
+    const horasPorDia = <?php echo json_encode($horasPorDia); ?>;
+
+    // Gráfico de línea para Ganancias (datos dinámicos)
     const lineChart = new Chart(lineCtx, {
         type: 'line',
         data: {
-            labels: ['23 Nov', '24', '25', '26', '27', '28', '29', '30'],
+            labels: fechasGanancias,
             datasets: [{
                 label: 'Ganancias',
-                data: [25000, 27000, 30000, 35000, 37000, 40000, 45000, 50000],
+                data: datosGanancias,
                 borderColor: '#000',
                 fill: false
             }]
@@ -196,13 +222,14 @@ body {
         }
     });
 
+    // Gráfico de barras para Horas más Alquiladas (datos dinámicos)
     const barChart = new Chart(barCtx, {
         type: 'bar',
         data: {
             labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
             datasets: [{
                 label: 'Horas más Alquiladas',
-                data: [14, 17, 19, 21, 18, 19, 15],
+                data: horasPorDia,
                 backgroundColor: '#000'
             }]
         },
