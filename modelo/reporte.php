@@ -91,4 +91,16 @@ class Reporte extends Conexion {
             
             return ['fechas' => $fechas, 'ganancias' => $ganancias];
         }
+        // Obtener las reservas canceladas y los usuarios que las cancelaron
+    public function obtenerReservasCanceladas() {
+        $sql = "SELECT u.nombre_usuario, u.email, r.fecha_reserva, r.estado
+                FROM reservas r
+                JOIN usuario u ON r.usuario_id = u.usuario_id
+                WHERE r.estado = 'CANCELADA'";  // Asumiendo que 'cancelada' es el estado que marca una reserva cancelada
+        $stmt = $this->conectar()->prepare($sql);
+        $stmt->execute();
+        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $this->desconectar();
+        return $resultados;
+    }
 }
