@@ -11,6 +11,7 @@ $horasAlquiladas = $reporte->obtenerHorasAlquiladas();
 $clientesFrecuentes = $reporte->obtenerClientesFrecuentes();
 $horasPorDia = $reporte->obtenerHorasPorDia(); // Obtener horas por día para el gráfico de barras
 $gananciasPorDia = $reporte->obtenerGananciasPorDia();
+$reservasCanceladas = $reporte->obtenerReservasCanceladas();  // Obtener las reservas canceladas
 ?>
 
 <style>
@@ -93,7 +94,7 @@ body {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-    
+
 }
 
 .chart-box {
@@ -119,7 +120,7 @@ body {
     width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
-    
+
 }
 
 .container-xl {
@@ -129,6 +130,74 @@ body {
     padding: 20px;
     /* Añadir espaciado interno */
 }
+
+/* Estilo para la sección de reservas canceladas */
+.cancelled-reservations {
+    background: rgba(255, 255, 255, 0.1);
+    /* Fondo semi-transparente */
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    /* Sombra */
+    color: white;
+    width: 70%; /* Reducir al 50% del tamaño original */
+    margin: 0 auto; /* Centrar horizontalmente */
+}
+
+.cancelled-reservations h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #ff6f61;
+    /* Color llamativo para el título */
+}
+
+.cancelled-reservations ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cancelled-reservations .cancelled-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    /* Fondo más claro para cada ítem */
+    border-radius: 6px;
+    transition: background 0.3s ease;
+}
+
+.cancelled-reservations .cancelled-item:hover {
+    background: rgba(255, 255, 255, 0.3);
+    /* Fondo más claro al pasar el cursor */
+}
+
+.cancelled-reservations .cancelled-info {
+    font-size: 18px;
+    color: #f1f1f1;
+    font-weight: bold;
+}
+
+.cancelled-reservations .cancelled-details p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #ddd;
+}
+
+.cancelled-reservations .status {
+    color: #ff6f61;
+    /* Color rojo para resaltar el estado */
+    font-weight: bold;
+}
+
+.cancelled-reservations p {
+    font-size: 16px;
+    text-align: center;
+    color: #f1f1f1;
+}
+
 </style>
 
 
@@ -188,6 +257,31 @@ body {
             <h3>Horas más Alquiladas</h3>
             <canvas id="barChart"></canvas>
         </div>
+    </div>
+
+    <!-- Sección de reservas canceladas -->
+    <div class="cancelled-reservations">
+        <h3>Reservas Canceladas</h3>
+        <?php if (empty($reservasCanceladas)): ?>
+        <p>No hay reservas canceladas.</p>
+        <?php else: ?>
+        <ul>
+            <?php foreach ($reservasCanceladas as $reserva): ?>
+            <li class="cancelled-item">
+                <div class="cancelled-info">
+                    <strong>Usuario: <?php echo htmlspecialchars($reserva['nombre_usuario']); ?></strong> -
+                    <?php echo htmlspecialchars($reserva['email']); ?>
+                </div>
+                <div class="cancelled-details">
+                    <p><strong>Fecha de la reserva:</strong> <?php echo htmlspecialchars($reserva['fecha_reserva']); ?>
+                    </p>
+                    <p><strong>Estado:</strong> <span
+                            class="status"><?php echo htmlspecialchars($reserva['estado']); ?></span></p>
+                </div>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+        <?php endif; ?>
     </div>
 
     <!-- Script de gráficos -->
